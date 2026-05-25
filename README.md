@@ -16,7 +16,7 @@ The entry point of the workflow is to listen for any new message sent to the Tel
   
 ![Step 1 - Telegram Trigger](./telegram-google-calendar-agent/images/step1_telegram_trigger.png)
 
----
+
 
 #### Step 2: Configuring the AI Agent Engine
 The core reasoning engine of this project is the AI Agent node, which decides how to handle the user's request.
@@ -27,7 +27,7 @@ The core reasoning engine of this project is the AI Agent node, which decides ho
   
 ![Step 2 - AI Agent Configuration](./telegram-google-calendar-agent/images/agent_mapping.png)
 
----
+
 
 #### Step 3: Linking the Google Calendar Tool
 To allow the AI Agent to actually see your real-world appointments, it needs a specific tool attached to it.
@@ -40,7 +40,7 @@ To allow the AI Agent to actually see your real-world appointments, it needs a s
     
 ![Step 3 - Google Calendar Tool](./telegram-google-calendar-agent/images/google_calendar_tool.png)
 
----
+
 
 #### Step 4: Routing the Final Response via Telegram
 Once the AI Agent calls the calendar and fetches the data, the final step is to send that formulated answer back to your chat.
@@ -74,7 +74,7 @@ Before the AI Agent formats the response, we can inspect the raw data payload re
 ![Testing - JSON Output Payload](./telegram-google-calendar-agent/images/json_payload_output.png)
 
 #### 4. Final AI Response Received
-The AI successfully called the calendar, processed the structural events data, and returned a cleanly formatted summary in Arabic directly to the chat interface.
+The AI successfully called the calendar, processed the structural events data, and returned a cleanly formatted summary directly to the chat interface.
 
 ![Testing - AI Final Reply](./telegram-google-calendar-agent/images/telegram_response.png)
 
