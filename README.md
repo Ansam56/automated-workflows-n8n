@@ -66,6 +66,8 @@ Testing began by activating the workflow using **Execute workflow** and sending 
 #### 2. Successful Workflow Execution
 The entire canvas successfully executed in real-time. Every single node turned green, indicating perfect data routing, successful API handshakes, and proper execution loops.
 
+![Testing - Full Workflow Success](./telegram-google-calendar-agent/images/workflow_full.png)
+
 #### 3. Data Payload Inspection (Behind the Scenes)
 Before the AI Agent formats the response, we can inspect the raw data payload returned from the Google Calendar API inside n8n. This confirms that the system is successfully fetching and parsing structured JSON data directly from the server.
 
