@@ -21,7 +21,8 @@ The entry point of the workflow is to listen for any new message sent to the Tel
 #### Step 2: Configuring the AI Agent Engine
 The core reasoning engine of this project is the AI Agent node, which decides how to handle the user's request.
 
-* **How it was built:** * Connected an LLM Chat Model (like OpenAI Chat Model) to the AI Agent node.
+* **How it was built:**
+  * Connected an LLM Chat Model (like OpenAI Chat Model) to the AI Agent node.
   * Added a Memory node (Window Buffer Memory) so the AI remembers the conversation context.
 * **Input Mapping:** Inside the `Prompt` field, the user's dynamic message text was linked directly from the trigger using: `{{ $json.message.text }}`.
   
@@ -33,7 +34,8 @@ The core reasoning engine of this project is the AI Agent node, which decides ho
 To allow the AI Agent to actually see your real-world appointments, it needs a specific tool attached to it.
 
 * **How it was built:** A `Google Calendar` node was dragged and connected directly to the bottom of the AI Agent as a **Tool**.
-* **Node Configuration:** * **Resource:** `Event`
+* **Node Configuration:**
+  * **Resource:** `Event`
   * **Operation:** `Get Many`
   * **Calendar ID:** Linked to your primary email address (`ansamjanajreh@gmail.com`).
   * **Tool Description:** Changed to *Set Manually* with a clear description so the AI knows exactly when to call it: *"Use this tool to fetch, retrieve, or list the user's calendar events from Google Calendar."*
