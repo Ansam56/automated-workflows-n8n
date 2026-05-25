@@ -25,7 +25,7 @@ The core reasoning engine of this project is the AI Agent node, which decides ho
   * Added a Memory node (Window Buffer Memory) so the AI remembers the conversation context.
 * **Input Mapping:** Inside the `Prompt` field, the user's dynamic message text was linked directly from the trigger using: `{{ $json.message.text }}`.
   
-  ![Step 2 - AI Agent Configuration](./telegram-google-calendar-agent/images/agent_mapping.png)
+![Step 2 - AI Agent Configuration](./telegram-google-calendar-agent/images/agent_mapping.png)
 
 ---
 
@@ -66,7 +66,12 @@ Testing began by activating the workflow using **Execute workflow** and sending 
 #### 2. Successful Workflow Execution
 The entire canvas successfully executed in real-time. Every single node turned green, indicating perfect data routing, successful API handshakes, and proper execution loops.
 
-#### 3. Final AI Response Received
+#### 3. Data Payload Inspection (Behind the Scenes)
+Before the AI Agent formats the response, we can inspect the raw data payload returned from the Google Calendar API inside n8n. This confirms that the system is successfully fetching and parsing structured JSON data directly from the server.
+
+![Testing - JSON Output Payload](./telegram-google-calendar-agent/images/json_payload_output.png)
+
+#### 4. Final AI Response Received
 The AI successfully called the calendar, processed the structural events data, and returned a cleanly formatted summary in Arabic directly to the chat interface.
 
 ![Testing - AI Final Reply](./telegram-google-calendar-agent/images/telegram_response.png)
