@@ -1,0 +1,411 @@
+{
+  "name": "E-commerce Automation",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Order Confirmation - Alpha Digital Store",
+        "formDescription": "Thank you for shopping with us! Please fill out the form below with your accurate details to confirm your order, generate your invoice, and prepare your package for immediate shipping.",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Full Name",
+              "placeholder": "Ansam Janajreh",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Email Address",
+              "fieldType": "email",
+              "placeholder": "ansamjanajreh@gmail.com",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Phone Number",
+              "placeholder": "+970000000000",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Country",
+              "placeholder": "Palestine",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Order Total",
+              "fieldType": "number",
+              "placeholder": "200",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {
+          "appendAttribution": true
+        }
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.5,
+      "position": [
+        0,
+        0
+      ],
+      "id": "8cce0534-83ba-4c5a-b12c-0a7c91c61239",
+      "name": "On form submission",
+      "webhookId": "d73ae766-abc0-477f-bf31-3b972c78db4c"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e1099255-9266-4ba4-b9d0-f6c2b09df2d9",
+              "name": "firstName",
+              "value": "={{ $json.firstName }}",
+              "type": "string"
+            },
+            {
+              "id": "4b83b13d-5c5f-43ea-8db1-938d3cb32d1f",
+              "name": "lastName",
+              "value": "={{ $json.lastName }}",
+              "type": "string"
+            },
+            {
+              "id": "b539c174-aee3-4a15-838c-1952c32f383c",
+              "name": "email",
+              "value": "={{ $json.email }}",
+              "type": "string"
+            },
+            {
+              "id": "97781c85-26de-494b-8cd2-751cd2604d38",
+              "name": "phoneNumber",
+              "value": "={{ $json.phoneNumber }}",
+              "type": "string"
+            },
+            {
+              "id": "b3322f1f-fb6c-4181-bdf2-8988e55280ee",
+              "name": "country",
+              "value": "={{ $json.country }}",
+              "type": "string"
+            },
+            {
+              "id": "6cf3ea30-34f7-4496-a0b5-52c8c94d00bf",
+              "name": "orderTotal",
+              "value": "={{ $json.orderTotal }}",
+              "type": "number"
+            },
+            {
+              "id": "662a4eac-c689-45e8-ad73-9ce4c8d3d084",
+              "name": "submittedAt",
+              "value": "={{ $json.submittedAt }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        400,
+        0
+      ],
+      "id": "6b57a546-ea3f-4d5a-8b7d-2e4901459b74",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Loop over all items incoming from the Form Node\nfor (const item of $input.all()) {\n  \n  // 1. Normalize the Full Name (Trim extra spaces and split it)\n  const fullName = item.json['Full Name'] ? item.json['Full Name'].trim() : '';\n  const nameParts = fullName.split(' ');\n  const firstName = nameParts[0] || '';\n  const lastName = nameParts.slice(1).join(' ') || '';\n\n  // 2. Normalize Email Address (Convert to lowercase)\n  const email = item.json['Email Address'] ? item.json['Email Address'].toLowerCase().trim() : '';\n\n  // 3. Keep other clean data and structure the final output\n  item.json = {\n    firstName: firstName,\n    lastName: lastName,\n    fullName: fullName,\n    email: email,\n    phoneNumber: item.json['Phone Number'] || '',\n    country: item.json['Country'] || '',\n    orderTotal: Number(item.json['Order Total']) || 0, // Ensure it's a safe number\n    submittedAt: item.json['submittedAt'],\n    formMode: item.json['formMode']\n  };\n}\n\nreturn $input.all();"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        208,
+        0
+      ],
+      "id": "f7809126-e244-4339-b53d-bcfe93735cdf",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "22893c81-dacc-4d93-899b-a1ab2897056b",
+              "leftValue": "={{ $json.orderTotal }}",
+              "rightValue": 100,
+              "operator": {
+                "type": "number",
+                "operation": "gte"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        608,
+        0
+      ],
+      "id": "0c3865aa-406d-4297-aa57-da4820997afd",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.email }}",
+        "subject": "Thank you for your order! Exclusive VIP Reward Inside",
+        "emailType": "text",
+        "message": "=Hi {{ $json.firstName }}, \n\nThank you so much for shopping with Alpha Digital Store!\nWe have successfully received your order.  \n\nBecause your order total is ${{ $json.orderTotal }}, you have officially been unlocked as one of our VIP customers! 🌟  \n\nAs a token of our appreciation, here is an exclusive 20% discount code for your next purchase: 👉 Your Discount Code: VIP20  \n\nWe are already preparing your package for immediate shipping to {{ $json.country }}, and we will update you with the tracking details very soon.  \n\nThank you for choosing us, and have a wonderful day!  \n\nBest regards, \nAlpha Digital Store Team",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        816,
+        -64
+      ],
+      "id": "5c4dcb4d-17b8-4121-89e6-3b8bc04af467",
+      "name": "Send a message",
+      "webhookId": "6b49d4ed-1f5b-416c-8bf6-33b800f2278b",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "Y8PaQCszHLoxuqOJ",
+          "name": "Gmail OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.email }}",
+        "subject": "Order Confirmed! Your Alpha Digital Store Receipt",
+        "emailType": "text",
+        "message": "=Hi {{ $json.firstName }},  Thank you for shopping with Alpha Digital Store!\nWe are pleased to inform you that your order has been successfully received and is now being processed.  \n\nHere is a summary of your order:\n💰 Total Amount Paid: ${{ $json.orderTotal }} \n📍 Shipping Destination: {{ $json.country }} \n\nOur team is already working on packaging your items to ensure they reach you as quickly as possible. Once your package is shipped, we will send you another email with your tracking number.  \n\nIf you have any questions or need to make changes to your order, feel free to reply directly to this email. \n\nThank you again for your support! \n\nBest regards,\nAlpha Digital Store Team",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        816,
+        96
+      ],
+      "id": "f6af22c8-389a-455e-ac4f-cdd52255797a",
+      "name": "Send a message1",
+      "webhookId": "ca9fd508-535a-4da7-99e3-26e3ce3e8226",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "Y8PaQCszHLoxuqOJ",
+          "name": "Gmail OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1Zbnnp5ttZZl7la96nDqrYPSLs0u2txVyeLtQB4rHfj0",
+          "mode": "list",
+          "cachedResultName": "Alpha Store Orders",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Zbnnp5ttZZl7la96nDqrYPSLs0u2txVyeLtQB4rHfj0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Zbnnp5ttZZl7la96nDqrYPSLs0u2txVyeLtQB4rHfj0/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "First Name": "={{ $('If').item.json.firstName }}",
+            "Last Name": "={{ $('If').item.json.lastName }}",
+            "Email": "={{ $('If').item.json.email }}",
+            "Country": "={{ $('If').item.json.country }}",
+            "Order Total": "={{ $('If').item.json.orderTotal }}",
+            "submittedAt": "={{ $('If').item.json.submittedAt }}",
+            "Phone": "={{ $('If').item.json.phoneNumber }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "First Name",
+              "displayName": "First Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Last Name",
+              "displayName": "Last Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Country",
+              "displayName": "Country",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Phone",
+              "displayName": "Phone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Order Total",
+              "displayName": "Order Total",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "submittedAt",
+              "displayName": "submittedAt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1088,
+        -16
+      ],
+      "id": "d14844f8-bbd7-447c-8c3e-66b488b99b50",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "q47lqAWdreA5bJYc",
+          "name": "Google Sheets OAuth2 API"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send a message1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message1": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "95d14dc4-01bb-4802-a7eb-96d5b2d2df3c",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "4003a8e312cbf4c5e11a909f23843b34ff1e10643567b21792baf9b7acc7575c"
+  },
+  "id": "PrK1UWeJbHJSHRWs",
+  "tags": []
+}
