@@ -81,7 +81,7 @@ The AI successfully called the calendar, processed the structural events data, a
 
 ---
 
-## **[Automated E-commerce Order Processing System](./Automated-E-commerce-Order-Processing-System)**
+## **[Automated E-commerce Order Processing System](./Automated%20E-commerce%20Order%20Processing%20System)**
 
 An end-to-end automated pipeline built with **n8n** to streamline e-commerce order workflows. This system listens for customer form submissions, standardizes raw data fields using custom **JavaScript**, implements selective business routing thresholds, triggers dynamic email responses via **Gmail**, and logs all activities inside a secure database backend via **Google Sheets**.
 
@@ -91,9 +91,12 @@ An end-to-end automated pipeline built with **n8n** to streamline e-commerce ord
 
 #### Step 1: Customer Order Ingress (Form Submission)
 The workflow kicks off the moment a transaction entry or client checkout profile arrives at our primary webhook listener.
-* **The Process:** The consumer fills out an order checkout interface capturing key fields: *Full Name*, *Email Address*, *Phone Number*, *Country*, and the total *Order Total*.
-  
-![Step 1 - Order Form Submission](./Automated-E-commerce-Order-Processing-System/images/step1_order_form.png)
 
-![Step 1 - form Trigger](./Automated-E-commerce-Order-Processing-System/images/form_Trigger.png)
+* **The Process:** The consumer fills out an order checkout interface capturing key fields: *Full Name*, *Email Address*, *Phone Number*, *Country*, and the total *Order Total*.
+
+<p align="center">
+  <img src="./Automated%20E-commerce%20Order%20Processing%20System/images/step1_order_form.png" width="40%" alt="Order Form UI" />
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="./Automated%20E-commerce%20Order%20Processing%20System/images/form%20Trigger.png" width="48%" alt="n8n Form Trigger Node" />
+</p>
 
