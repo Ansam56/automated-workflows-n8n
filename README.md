@@ -100,3 +100,25 @@ The workflow kicks off the moment a transaction entry or client checkout profile
   <img src="./Automated%20E-commerce%20Order%20Processing%20System/images/form%20Trigger.png" width="48%" alt="n8n Form Trigger Node" />
 </p>
 
+
+#### Step 2: Data Standardization via JavaScript
+To normalize inconsistent data inputs (such as mixed casing, leading whitespaces, or missing keys) before database write operations, a custom script engine is injected.
+* **The Execution:** Using a dedicated **Code Node** loaded with a script layout, the workflow cleans client email records, parses numeric values safely, and exports structured variables.
+  
+ ![Step 2 - Custom JavaScript Normalization](./Automated%20E-commerce%20Order%20Processing%20System/images/step2_js_cleaning.png)
+
+
+ #### Step 3: Dynamic Field Mapping
+Following data cleanup operations, the structured object parameters must be explicitly instantiated into the localized operational context.
+* **The Process:** An **Edit Fields** configuration maps variables cleanly (e.g., parsing raw `firstName` or formatting time metadata into a standardized `submittedAt` timestamp string).
+  
+![Step 3 - Localized Value Mapping](./Automated%20E-commerce%20Order%20Processing%20System/images/step3_field_mapping.png)
+
+
+#### Step 4: Business Logic & Threshold Filtering
+To create differential client journeys, we execute an automated split router based on active spending targets.
+* **The Rule:** An **If Node** evaluates incoming values to check if `{{ $json.orderTotal }}` is **greater than or equal to 100**.
+* **The Split Path:** * **True Branch:** Routes orders $\ge 100$ to premium communication pathways.
+  * **False Branch:** Routes low-threshold orders through standard operational processing.
+    
+![Step 4 - Conditional Router Pipeline](./Automated%20E-commerce%20Order%20Processing%20System/images/step4_if_logic.png)
