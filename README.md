@@ -13,7 +13,8 @@ The entry point of the workflow is to listen for any new message sent to the Tel
 
 * **How it was built:** The bot was created using Telegram's `@BotFather` to get a secure API Token.
 * **Node Configuration:** A `Telegram Trigger` node was added to n8n and configured with the bot credentials to listen for the `message` event.
-  ![Step 1 - Telegram Trigger](./telegram-google-calendar-agent/images/step1_telegram_trigger.png)
+  
+![Step 1 - Telegram Trigger](./telegram-google-calendar-agent/images/step1_telegram_trigger.png)
 
 ---
 
@@ -23,7 +24,7 @@ The core reasoning engine of this project is the AI Agent node, which decides ho
 * **How it was built:** * Connected an LLM Chat Model (like OpenAI Chat Model) to the AI Agent node.
   * Added a Memory node (Window Buffer Memory) so the AI remembers the conversation context.
 * **Input Mapping:** Inside the `Prompt` field, the user's dynamic message text was linked directly from the trigger using: `{{ $json.message.text }}`.
-* **System Prompt:** Instructed the AI to understand dates based on the current time and always reply politely in Arabic.
+  
   ![Step 2 - AI Agent Configuration](./telegram-google-calendar-agent/images/agent_mapping.png)
 
 ---
@@ -36,6 +37,7 @@ To allow the AI Agent to actually see your real-world appointments, it needs a s
   * **Operation:** `Get Many`
   * **Calendar ID:** Linked to your primary email address (`ansamjanajreh@gmail.com`).
   * **Tool Description:** Changed to *Set Manually* with a clear description so the AI knows exactly when to call it: *"Use this tool to fetch, retrieve, or list the user's calendar events from Google Calendar."*
+    
 ![Step 3 - Google Calendar Tool](./telegram-google-calendar-agent/images/google_calendar_tool.png)
 
 ---
@@ -47,6 +49,7 @@ Once the AI Agent calls the calendar and fetches the data, the final step is to 
 * **Node Configuration:**
   * **Chat ID:** Mapped dynamically using expressions to match your personal chat ID: `{{ $('Telegram Trigger').item.json.message.chat.id }}`.
   * **Text:** Mapped to output the AI's final response: `{{ $json.output }}`.
+    
 ![Step 4 - Telegram Send Message](./telegram-google-calendar-agent/images/telegram_output_node.png)
 
 ---
