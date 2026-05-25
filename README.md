@@ -79,6 +79,12 @@ The AI successfully called the calendar, processed the structural events data, a
 
 ![Testing - AI Final Reply](./telegram-google-calendar-agent/images/telegram_response.png)
 
+
+### Live Demo
+You can test this AI-powered scheduling assistant live by sending a natural language query directly to the active Telegram bot link below:
+
+  **[Chat with the Live Calendar Assistant Bot](https://ansam65.app.n8n.cloud/webhook/bb5ae2fe-52c7-4736-b518-0a4eb41434a5/webhook)**
+
 ---
 
 ## **[Automated E-commerce Order Processing System](./Automated%20E-commerce%20Order%20Processing%20System)**
@@ -122,3 +128,9 @@ To create differential client journeys, we execute an automated split router bas
   * **False Branch:** Routes low-threshold orders through standard operational processing.
     
 ![Step 4 - Conditional Router Pipeline](./Automated%20E-commerce%20Order%20Processing%20System/images/step4_if_logic.png)
+
+
+### Live Demo
+You can test this automated pipeline live by submitting a mock order through the production form link below:
+
+  **[Try the Live E-commerce Order Form](https://ansam65.app.n8n.cloud/form/d73ae766-abc0-477f-bf31-3b972c78db4c)**
