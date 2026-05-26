@@ -129,6 +129,38 @@ To create differential client journeys, we execute an automated split router bas
     
 ![Step 4 - Conditional Router Pipeline](./Automated%20E-commerce%20Order%20Processing%20System/images/step4_if_logic.png)
 
+---
+
+### Live Testing & Results
+
+#### 1. Unified Workflow Architecture View
+When tests are fired across the staging environment, the engine tracks complete trace passes without systemic runtime failures, illuminating all active routes in green.
+
+![Step 4 - Conditional Router Pipeline](./Automated%20E-commerce%20Order%20Processing%20System/images/step4_if_logic.png)
+
+
+#### 2. Dual-Route Communication Output (Gmail Live Verification)
+Depending on which value profile matches the filter constraint rules established above, the system dispatches highly specialized, reactive email confirmation receipts to the respective buyers.
+
+#### Case A: Standard Order Routing (False Branch Output)
+* **The Context:** When user *Sana Taher* completed an order total value of **$85** (failing the $\ge 100$ test constraint), her payload dropped into the secondary node pool (`Send a message1`). 
+* **The Output:** A standard receipt copy was generated summarizing her shipment parameters to the destination country safely.
+
+![Case A - Standard Invoice Email Summary](./Automated%20E-commerce%20Order%20Processing%20System/images/standard_receipt_email.png)
+
+#### Case B: VIP Premium Rewards Order Routing (True Branch Output)
+* **The Context:** When user *Ansam Janajreh* submitted a transactional order total value of **$210**, the core system verified it passed our business criteria and shifted her straight to the premium node pool (`Send a message`).
+* **The Output:** An exclusive customer validation receipt was dispatched containing a special reward discount tag (`VIP20`) thanking her for her premium engagement level.
+
+![Case B - VIP Customer Promo Code Email Summary](./Automated%20E-commerce%20Order%20Processing%20System/images/vip_reward_email.png)
+
+
+
+#### 3. Ledger Database Synchronization (Google Sheets Backend Log)
+Simultaneously, at the final step, both system routes converge to append and serialize all critical transactional information records seamlessly into a unified storage system tracker spreadsheet.
+
+![Database Synchronized Rows Log](./Automated%20E-commerce%20Order%20Processing%20System/images/google_sheets_live_database.png)
+
 
 ### Live Demo
 You can test this automated pipeline live by submitting a mock order through the production form link below:
