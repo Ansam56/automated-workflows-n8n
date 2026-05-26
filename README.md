@@ -124,7 +124,8 @@ Following data cleanup operations, the structured object parameters must be expl
 #### Step 4: Business Logic & Threshold Filtering
 To create differential client journeys, we execute an automated split router based on active spending targets.
 * **The Rule:** An **If Node** evaluates incoming values to check if `{{ $json.orderTotal }}` is **greater than or equal to 100**.
-* **The Split Path:** * **True Branch:** Routes orders $\ge 100$ to premium communication pathways.
+* **The Split Path:**
+  * **True Branch:** Routes orders $\ge 100$ to premium communication pathways.
   * **False Branch:** Routes low-threshold orders through standard operational processing.
     
 ![Step 4 - Conditional Router Pipeline](./Automated%20E-commerce%20Order%20Processing%20System/images/step4_if_logic.png)
