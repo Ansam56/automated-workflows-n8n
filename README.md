@@ -81,9 +81,9 @@ The AI successfully called the calendar, processed the structural events data, a
 
 
 ### Live Demo
-You can test this AI-powered scheduling assistant live by sending a natural language query directly to the active Telegram bot link below:
+The AI Agent is fully active and listening in production. You can test this intelligent scheduling assistant live by opening a direct chat window with the active Telegram bot link below:
 
-  **[Chat with the Live Calendar Assistant Bot](https://ansam65.app.n8n.cloud/webhook/bb5ae2fe-52c7-4736-b518-0a4eb41434a5/webhook)**
+  **[Chat Live with the Calendar Assistant Bot](https://t.me/ansam65_bot)**
 
 ---
 
