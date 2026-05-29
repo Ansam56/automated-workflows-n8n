@@ -85,7 +85,21 @@ The AI Agent is fully active and listening in production. You can test this inte
 
   **[Chat Live with the Calendar Assistant Bot](https://t.me/ansam65_bot)**
 
+
 ---
+
+
+## **[AI-Powered Incident Management & Automation System](./Automated%20DevOps%20&%20IT%20Support%20Ticketing%20Hub%20via%20Slack)**
+
+An enterprise-grade, end-to-end automated incident response and classification pipeline built with n8n. The system monitors Slack for production bugs or technical issues reported by users or automated QA smoke tests, leverages Generative AI to analyze and structure the raw context, registers tracking tickets inside Trello, and routes highly contextualized confirmation replies back to specific Slack threads via an intelligent conditional architecture.
+
+![full_workflow](./Automated%20DevOps%20&%20IT%20Support%20Ticketing%20Hub%20via%20Slackt/images/full_workflow.png)
+
+### Step-by-Step Implementation
+
+
+---
+
 
 ## **[Automated E-commerce Order Processing System](./Automated%20E-commerce%20Order%20Processing%20System)**
 
