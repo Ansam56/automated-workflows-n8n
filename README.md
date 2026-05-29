@@ -93,9 +93,57 @@ The AI Agent is fully active and listening in production. You can test this inte
 
 An enterprise-grade, end-to-end automated incident response and classification pipeline built with n8n. The system monitors Slack for production bugs or technical issues reported by users or automated QA smoke tests, leverages Generative AI to analyze and structure the raw context, registers tracking tickets inside Trello, and routes highly contextualized confirmation replies back to specific Slack threads via an intelligent conditional architecture.
 
-![full_workflow](./Automated%20DevOps%20&%20IT%20Support%20Ticketing%20Hub%20via%20Slackt/images/full_workflow.png)
+![full_workflow](./Automated%20DevOps%20&%20IT%20Support%20Ticketing%20Hub%20via%20Slack/images/full_workflow.png)
 
 ### Step-by-Step Implementation
+
+### Step-by-Step Implementation
+
+#### Step 1: Automated Incident Ingress (Slack Trigger)
+The workflow kicks off dynamically the moment a team member or a testing framework reports a bug entry inside a monitored Slack workspace channel.
+
+* **How it was built:** A `Slack Trigger` node was deployed to listen live for new app mentions or specific message channel events.
+* **Data Captured:** Extracts raw text, client message IDs, user details, and the unique timestamp string (`ts`) to initiate context tracking.
+
+![Step 1 - Slack Event Trigger](./Automated%20DevOps%20&%20IT%20Support%20Ticketing%20Hub%20via%20Slack/images/step1_slack_trigger.png)
+
+#### Step 2: Extracting Intelligence (AI Agent Configuration)
+The core reasoning and classification layer relies on an advanced AI Agent node connected to a Large Language Model to structure messy human reporting.
+
+* **How it was built:** Connected an LLM Chat Model (OpenAI Chat Model) to the AI Agent node to provide semantic analytical capabilities.
+* **Input Mapping:** Inside the agent prompt, the dynamic message text payload from the channel is bound using expressions: `{{ $json.text }}`.
+* **Structured Output:** The agent parses the text and standardizes it into distinct key variables: `category`, `urgency`, and an engineer-friendly `summary`.
+
+![Step 2 - AI Agent & OpenAI Model](./Automated%20DevOps%20&%20IT%20Support%20Ticketing%20Hub%20via%20Slack/images/step2_ai_agent.png)
+
+#### Step 3: URL Parameter Normalization via JavaScript
+To facilitate bidirectional hyperlinking between platforms, a dedicated data transformation layer is injected.
+
+* **How it was built:** A custom JavaScript `Code Node` parses runtime parameters.
+* **The Operation:** It safely isolates the workspace metadata and performs string operations on the message timestamp string (`{{ $json.ts.replace('.', '') }}`) to manually construct a full, clickable browser URL (`messageUrl`) pointing directly back to the original Slack context.
+
+![Step 3 - JavaScript Context Normalization](./Automated%20DevOps%20&%20IT%20Support%20Ticketing%20Hub%20via%20Slack/images/step3_js_code.png)
+
+#### Step 4: Ledger Registration (Trello Ticket Creation)
+Once the metadata is fully enriched, the issue must be officially registered into the engineering team's project board backlog.
+
+* **How it was built:** A `Trello` node is integrated into the linear pipeline using a dedicated List ID mapping configuration.
+* **Payload Customization:**
+  * **Card Name:** Generated dynamically with the format: `[{{ $json.urgency }}] - {{ $json.category }}: {{ $json.summary }}`.
+  * **Description:** Injected with structured markdown text including the AI summary and a direct embedded context link: `[View Original Message]({{ $json.messageUrl }})`.
+
+![Step 4 - Trello Ticket Generation](./Automated%20DevOps%20&%20IT%20Support%20Ticketing%20Hub%20via%20Slack/images/step4_trello_node.png)
+
+#### Step 5: Deterministic Pipeline Splitting (If Node Logic)
+To separate emergency critical response loops from standard logging tasks, we execute a localized condition router immediately after database registration.
+
+* **The Rule:** An `If Node` evaluates the normalized `{{ $json.urgency }}` parameter.
+* **The Filter Criteria:** Checks whether the string equals `high` or `critical`.
+* **The Paths:**
+  * **True Branch:** Instantly flags high-risk failures for immediate engineering team alert.
+  * **False Branch:** Diverts standard operations (Medium/Low) into passive tracking queues.
+
+![Step 5 - Conditional If Router](./Automated%20DevOps%20&%20IT%20Support%20Ticketing%20Hub%20via%20Slack/images/step5_if_logic.png)
 
 
 ---
