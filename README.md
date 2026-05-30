@@ -185,6 +185,12 @@ In parallel, the system seamlessly appends a tracking card into the standard bac
 ![Testing - trello_for_lowBug](./Automated%20DevOps%20&%20IT%20Support%20Ticketing%20Hub%20via%20Slack/images/trello_for_lowBug.png)
 
 
+### Live Demo
+The automated incident response pipeline is fully active and listening in production. You can test this intelligent orchestration system live by simulating a bug report through the active Slack trigger integration link below:
+
+📥 **[Test the Live Incident Automation Hub via Slack](https://ansam-dev-hub.slack.com/archives/C0B7BEZ58BS)**
+
+
 ---
 
 
