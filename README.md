@@ -172,6 +172,20 @@ Simultaneously, the payload triggers an instant ledger write, logging the incide
 ![Testing - trello_for_criticalBug](./Automated%20DevOps%20&%20IT%20Support%20Ticketing%20Hub%20via%20Slack/images/trello_for_criticalBug.png)
 
 
+#### Case B: Standard Issue Logging (False Branch Output)
+* **The Context:** An issue labeled as `Low` or `Medium` passes validation.
+* **The Response:** The secondary node pool (`Send a message1`) executes a quiet confirmation log directly into the thread without triggering noisy alert sequences.
+
+Slack Thread Logging Log
+When a lower-priority bug is detected, the bot cleanly acknowledges the request directly inside the communication thread to prevent duplicate reporting while keeping the channel distraction-free.
+![Testing - slack_for_lowBug](./Automated%20DevOps%20&%20IT%20Support%20Ticketing%20Hub%20via%20Slack/images/slack_for_lowBug.png)
+
+
+Trello Backlog Card Synchronization
+In parallel, the system seamlessly appends a tracking card into the standard backlog queue inside Trello, ensuring full asset classification and tracking readiness.
+![Testing - trello_for_lowBug](./Automated%20DevOps%20&%20IT%20Support%20Ticketing%20Hub%20via%20Slack/images/trello_for_lowBug.png)
+
+
 ---
 
 
