@@ -95,7 +95,6 @@ An enterprise-grade, end-to-end automated incident response and classification p
 
 ![full_workflow](./Automated%20DevOps%20&%20IT%20Support%20Ticketing%20Hub%20via%20Slack/images/full_workflow.png)
 
-### Step-by-Step Implementation
 
 ### Step-by-Step Implementation
 
@@ -145,6 +144,29 @@ To separate emergency critical response loops from standard logging tasks, we ex
 
 ![Step 5 - Conditional If Router](./Automated%20DevOps%20&%20IT%20Support%20Ticketing%20Hub%20via%20Slack/images/step5_if_logic.png)
 
+---
+
+### Live Testing & Results
+
+### 1. Linear Workflow Execution Success
+When incident traces are simulated, data flows linearly through the primary integrations and splits perfectly down to the dedicated Slack communication endpoints without losing upstream payload schemas or triggering undefined object references.
+
+![Testing - Full Linear Workflow Success](./Automated%20DevOps%20&%20IT%20Support%20Ticketing%20Hub%20via%20Slack/images/full_workflow.png)
+
+---
+
+### 2. Dual-Route Communication Output (Slack Live Threads Verification)
+Depending on the urgency evaluation executed by the `If` router, the bot safely responds inside the exact thread where the bug was born to maintain tidy workspaces.
+
+#### Case A: Emergency Alerts Ingress (True Branch Output)
+* **The Context:** An incident categorized as `High` or `Critical` runs successfully through the system.
+* **The Response:** The node (`Send a message`) targets the active channel thread, issuing an on-call response format emphasizing immediate action and printing the newly generated short tracking link.
+
+Slack Ingress & Bot Response Thread
+When a user reports a critical issue, the automated system captures it and the bot instantaneously threads a structured confirmation containing the direct Trello shortcut back into the channel workspace.
+
+Dynamic Trello Card Generation
+Simultaneously, the payload triggers an instant ledger write, logging the incident under the high-priority board list with comprehensive cross-referencing parameters populated.
 
 ---
 
