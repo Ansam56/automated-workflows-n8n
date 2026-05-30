@@ -188,7 +188,7 @@ In parallel, the system seamlessly appends a tracking card into the standard bac
 ### Live Demo
 The automated incident response pipeline is fully active and listening in production. You can test this intelligent orchestration system live by simulating a bug report through the active Slack trigger integration link below:
 
-📥 **[Test the Live Incident Automation Hub via Slack](https://ansam-dev-hub.slack.com/archives/C0B7BEZ58BS)**
+  **[Test the Live Incident Automation Hub via Slack](https://ansam-dev-hub.slack.com/archives/C0B7BEZ58BS)**
 
 
 ---
