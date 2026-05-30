@@ -151,7 +151,7 @@ To separate emergency critical response loops from standard logging tasks, we ex
 ### 1. Linear Workflow Execution Success
 When incident traces are simulated, data flows linearly through the primary integrations and splits perfectly down to the dedicated Slack communication endpoints without losing upstream payload schemas or triggering undefined object references.
 
-![Testing - Full Linear Workflow Success](./Automated%20DevOps%20&%20IT%20Support%20Ticketing%20Hub%20via%20Slack/images/full_workflow.png)
+![Testing - Full Linear Workflow Success](./Automated%20DevOps%20&%20IT%20Support%20Ticketing%20Hub%20via%20Slack/images/green_workflow.png)
 
 ---
 
@@ -164,9 +164,13 @@ Depending on the urgency evaluation executed by the `If` router, the bot safely 
 
 Slack Ingress & Bot Response Thread
 When a user reports a critical issue, the automated system captures it and the bot instantaneously threads a structured confirmation containing the direct Trello shortcut back into the channel workspace.
+![Testing - slack_for_crticialBug](./Automated%20DevOps%20&%20IT%20Support%20Ticketing%20Hub%20via%20Slack/images/slack_for_crticialBug.png)
+
 
 Dynamic Trello Card Generation
 Simultaneously, the payload triggers an instant ledger write, logging the incident under the high-priority board list with comprehensive cross-referencing parameters populated.
+![Testing - trello_for_criticalBug](./Automated%20DevOps%20&%20IT%20Support%20Ticketing%20Hub%20via%20Slack/images/trello_for_criticalBug.png)
+
 
 ---
 
